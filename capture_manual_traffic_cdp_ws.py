@@ -174,7 +174,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--cdp", default="http://127.0.0.1:9222", help="CDP HTTP endpoint")
     p.add_argument(
         "--target-url",
-        default="https://www.your-url-here
+        default="https://www.your-url-here",
         help="Subcadena para elegir la pestaña objetivo",
     )
     p.add_argument("--output", default="traffic-debug-python.json", help="Ruta JSON salida")
