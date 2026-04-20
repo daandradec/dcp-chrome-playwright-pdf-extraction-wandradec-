@@ -1,0 +1,34 @@
+En terminal abrir google chrome con scp
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --remote-debugging-port=9222 \
+  --remote-debugging-address=127.0.0.1 \
+  --remote-allow-origins="*" \
+  --user-data-dir="$HOME/.chrome-cdp-daandradev" \
+  --profile-directory="Default"
+
+-- genera el json de leer las url con playwright
+python3 /Users/daandradec/Documents/Playground/build_best_quality_pdf.py \
+  --base-url "https://www.your-url-here/visor/regimensimple/" \
+  --start 1 --end 195 \
+  --output "/Users/daandradec/regimen_195_paginas_hd.pdf" \
+  --cookie-auto \
+  --cdp-url "http://127.0.0.1:9222" \
+  --max-probes-per-page 120 \
+  --probe-timeout 8
+
+
+-- generar el json de request con web sockets
+python3 /Users/daandradec/Documents/Playground/capture_manual_traffic_cdp_ws.py \
+  --cdp "http://127.0.0.1:9222" \
+  --target-url "your-url-here/lessons/e-book-regimen-simple/" \
+  --output "/Users/daandradec/traffic-debug-python.json" \
+  --autosave-seconds 3
+
+-- el de investigar con scraping
+python3 /Users/daandradec/Documents/Playground/download_pdf_from_active_tab.py \
+  --cdp "http://127.0.0.1:9222" \
+  --url "https://www.your-url-here/lessons/e-book-regimen-simple/" \
+  --output "/Users/daandradec/regimen-simple.pdf" \
+  --timeout 60 \
+  --debug-json "/Users/daandradec/traffic-debug-python.json" \
+  --debug-body-limit 300000
